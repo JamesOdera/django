@@ -6,7 +6,7 @@ import datetime as dt
 def welcome(request):
     return render(request, 'welcome.html')
 
-def album_of_day(request):
+def album_today(request):
     date = dt.date.today()
     return render(request, 'all-album/today-album.html', {"date": date,})
 
