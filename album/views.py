@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse
 import datetime as dt
+from .models import Article
 
 # Create your views here.
 def welcome(request):
@@ -8,7 +9,8 @@ def welcome(request):
 
 def album_today(request):
     date = dt.date.today()
-    return render(request, 'all-album/today-album.html', {"date": date,})
+    album = Article.todays_album()
+    return render(request, 'all-album/today-album.html', {"date": date,"album":album})
 
 def convert_dates(dates):
 
@@ -21,9 +23,7 @@ def convert_dates(dates):
     return day
 
 def past_days_album(request,past_date):
-        
     try:
-        
         date = dt.datetime.strptime(past_date,'%Y-%m-%d').date()
 
     except ValueError:
@@ -31,6 +31,8 @@ def past_days_album(request,past_date):
         assert False
 
     if date == dt.date.today():
-        return redirect(album_of_day)
+        return redirect(album_today)
 
-    return render(request, 'all-album/past-album.html', {"date": date})
+    album = Article.days_album(date)
+    return render(request, 'all-album/past-album.html',{"date": date,"album":album})
+
