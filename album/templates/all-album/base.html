@@ -13,15 +13,17 @@
 
   {% block styles %}
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/basealbums.css' %}">
+    <link rel="stylesheet" href="{% static 'css/basealbumss.css' %}">
   {% endblock %}
 
 </head>
 <body>
 
     {% include "navbar.html" %}
+    <br>
+    <hr>
 
-    {% block content %} <h1 class='text-center'>Images for {{date|date:"l d-F Y"}}</h1> {%endblock%}
+    {% block content %} <h1 class='text-center'>{{date|date:"l d-F Y"}}</h1> {%endblock%}
 
     {% block scripts %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
